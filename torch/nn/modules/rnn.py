@@ -206,7 +206,9 @@ class RNNBase(Module):
             result = _impl(input, hx, self._get_flat_weights(), self.bias, self.num_layers,
                            self.dropout, self.training, self.bidirectional, self.batch_first)
         else:
-            result = _impl(input, batch_sizes, hx, self._get_flat_weights(), self.bias,
+            # I can't believe I have to do this
+            print('henlo monkey patch')
+            result = _impl(input, batch_sizes, hx, self._get_flat_weights(), (self.bias),
                            self.num_layers, self.dropout, self.training, self.bidirectional)
         output = result[0]
         hidden = result[1]
